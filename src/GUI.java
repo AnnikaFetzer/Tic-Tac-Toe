@@ -1,0 +1,78 @@
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
+public class GUI extends JFrame{
+    public JButton button10;
+    public static JLabel label;
+    JPanel panel;
+    public static JButton[] buttons = new JButton[9];
+
+    public ArrayList<JButton> buttons2 = new ArrayList<>();
+
+
+    public GUI(){
+        this.setTitle("Tic-Tac-Toe");
+        this.setSize(800, 400);
+        panel = new JPanel();
+        // Leeres JLabel-Objekt wird erzeugt
+        label = new JLabel();
+
+        //das Panel bekommt das 4x3-Gridlayout
+        panel.setLayout(new java.awt.GridLayout(4,3));
+
+
+        //Buttons werden erstellt
+        for(int i=0; i<9; i++) {
+            buttons[i] = new JButton("");
+            //buttons[i].addActionListener(this);
+            buttons[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton clickedButton = (JButton) e.getSource();
+                    if(clickedButton.getText().equals("")){
+                        clickedButton.setText(Game.next());
+                        clickedButton.setText(Game.next());
+                        Game.winner(buttons2.indexOf(clickedButton));
+                    }
+                    else{
+                        label.setText("Wählen Sie ein anderes Feld!");
+                    }
+                }
+            });
+            buttons2.add(buttons[i]);
+            panel.add(buttons[i]);
+        }
+
+        button10 = new JButton("Neue Runde");
+
+        //Buttons werden dem Listener zugeordnet
+        //button10.addActionListener(this);
+        button10.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for(int j=0; j<9; j++){
+                    buttons[j].setText("");
+                }
+                label.setText("");
+            }
+        });
+
+        //Button 10 wird dem JPanel hinzugefügt
+        panel.add(button10);
+
+        //JLabel wird dem Panel hinzugefügt
+        panel.add(label);
+        this.add(panel);
+    }
+
+    public static void main(String[] args)
+    {
+        // Ein neues Objekt der Klasse BeispielListener wird erzeugt
+        // und sichtbar gemacht
+        GUI gui = new GUI();
+        gui.setVisible(true);
+    }
+}
+
