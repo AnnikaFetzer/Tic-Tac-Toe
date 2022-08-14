@@ -5,14 +5,17 @@ import java.util.ArrayList;
 
 public class GUI extends JFrame{
     public JButton button10;
-    public static JLabel label;
+    public JLabel label;
     JPanel panel;
-    public static JButton[] buttons = new JButton[9];
-
+    public JButton[] buttons = new JButton[9];
     public ArrayList<JButton> buttons2 = new ArrayList<>();
+    private Game game;
 
 
     public GUI(){
+        //erzeugen eines Game-Objekts
+        game = new Game();
+
         this.setTitle("Tic-Tac-Toe");
         this.setSize(800, 400);
         panel = new JPanel();
@@ -32,9 +35,8 @@ public class GUI extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     JButton clickedButton = (JButton) e.getSource();
                     if(clickedButton.getText().equals("")){
-                        clickedButton.setText(Game.next());
-                        clickedButton.setText(Game.next());
-                        Game.winner(buttons2.indexOf(clickedButton));
+                        clickedButton.setText(game.next());
+                        game.winner(buttons2.indexOf(clickedButton));
                     }
                     else{
                         label.setText("Wählen Sie ein anderes Feld!");
@@ -65,14 +67,6 @@ public class GUI extends JFrame{
         //JLabel wird dem Panel hinzugefügt
         panel.add(label);
         this.add(panel);
-    }
-
-    public static void main(String[] args)
-    {
-        // Ein neues Objekt der Klasse BeispielListener wird erzeugt
-        // und sichtbar gemacht
-        GUI gui = new GUI();
-        gui.setVisible(true);
     }
 }
 

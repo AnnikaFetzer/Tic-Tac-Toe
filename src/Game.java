@@ -1,58 +1,68 @@
 
 
 public class Game {
-    private static String last = "O";
+    private String last = "O";
+    static GUI gui;
 
-    public static String next(){
+
+    public static void main(String[] args)
+    {
+        // Ein neues Objekt der Klasse BeispielListener wird erzeugt
+        // und sichtbar gemacht
+        gui = new GUI();
+        gui.setVisible(true);
+    }
+
+    public String next(){
         if(last.equals("O")){
             last = "X";
-            GUI.label.setText("O ist am Zug");
+            gui.label.setText("O ist am Zug");
         }
         else{
             last = "O";
-            GUI.label.setText("X ist am Zug");
+            gui.label.setText("X ist am Zug");
         }
         return last;
     }
 
-    public static void winner(int index){
+    public void winner(int index){
         //überpüfen der Spalte vom übergebenen Index
-        if(GUI.buttons[index%3].getText().equals(GUI.buttons[index%3 + 3].getText()) && GUI.buttons[index%3].getText().equals(GUI.buttons[index%3 + 6].getText())){
-            GUI.label.setText("Spieler " + last + " hat gewonnen");
+        if(gui.buttons[index%3].getText().equals(gui.buttons[index%3 + 3].getText()) && gui.buttons[index%3].getText().equals(gui.buttons[index%3 + 6].getText())){
+            gui.label.setText("Spieler " + last + " hat gewonnen");
             return;
         }
 
         //überprüfen der Zeile abhängig der Spaltenposition
         if(index%3 == 0){
-            if(GUI.buttons[index].getText().equals(GUI.buttons[index+1].getText()) && GUI.buttons[index].getText().equals(GUI.buttons[index+2].getText())){
-                GUI.label.setText("Spieler " + last + "  hat gewonnen");
+            if(gui.buttons[index].getText().equals(gui.buttons[index+1].getText()) && gui.buttons[index].getText().equals(gui.buttons[index+2].getText())){
+                gui.label.setText("Spieler " + last + "  hat gewonnen");
                 return;
             }
         }
         if(index%3 == 1){
-            if(GUI.buttons[index].getText().equals(GUI.buttons[index-1].getText()) && GUI.buttons[index].getText().equals(GUI.buttons[index+1].getText())){
-                GUI.label.setText("Spieler " + last + " hat gewonnen");
+            if(gui.buttons[index].getText().equals(gui.buttons[index-1].getText()) && gui.buttons[index].getText().equals(gui.buttons[index+1].getText())){
+                gui.label.setText("Spieler " + last + " hat gewonnen");
                 return;
             }
         }
         if(index%3 == 2){
-            if(GUI.buttons[index].getText().equals(GUI.buttons[index-1].getText()) && GUI.buttons[index].getText().equals(GUI.buttons[index-2].getText())){
-                GUI.label.setText("Spieler " + last + " hat gewonnen");
+            if(gui.buttons[index].getText().equals(gui.buttons[index-1].getText()) && gui.buttons[index].getText().equals(gui.buttons[index-2].getText())){
+                gui.label.setText("Spieler " + last + " hat gewonnen");
                 return;
             }
         }
 
         //Überprüfen der Diagonalen
         if(index==0 || index==4 || index==8) {
-            if (GUI.buttons[0].getText().equals(GUI.buttons[4].getText()) && GUI.buttons[0].getText().equals(GUI.buttons[8].getText())) {
-                GUI.label.setText("Spieler " + last + " hat gewonnen");
+            if (gui.buttons[0].getText().equals(gui.buttons[4].getText()) && gui.buttons[0].getText().equals(gui.buttons[8].getText())) {
+                gui.label.setText("Spieler " + last + " hat gewonnen");
                 return;
             }
         }
 
         if(index==2 || index==4 || index==6){
-            if(GUI.buttons[2].getText().equals(GUI.buttons[4].getText()) && GUI.buttons[2].getText().equals(GUI.buttons[6].getText())){
-                GUI.label.setText("Spieler " + last + " hat gewonnen");
+            if(gui.buttons[2].getText().equals(gui.buttons[4].getText()) && gui.buttons[2].getText().equals(gui.buttons[6].getText())){
+                gui.label.setText("Spieler " + last + " hat gewonnen");
                 return;
             }
         }
