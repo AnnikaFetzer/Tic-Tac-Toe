@@ -34,12 +34,17 @@ public class GUI extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JButton clickedButton = (JButton) e.getSource();
-                    if(clickedButton.getText().equals("")){
-                        clickedButton.setText(game.next());
-                        game.winner(buttons2.indexOf(clickedButton));
+                    if(game.get_game_finished() == false){
+                        if(clickedButton.getText().equals("")){
+                            clickedButton.setText(game.next());
+                            game.winner(buttons2.indexOf(clickedButton));
+                        }
+                        else{
+                            label.setText("Wählen Sie ein anderes Feld!");
+                        }
                     }
                     else{
-                        label.setText("Wählen Sie ein anderes Feld!");
+                        label.setText("Starten Sie das Spiel neu");
                     }
                 }
             });
@@ -58,6 +63,7 @@ public class GUI extends JFrame{
                     buttons[j].setText("");
                 }
                 label.setText("");
+                game.set_game_finished(false);
             }
         });
 

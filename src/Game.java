@@ -3,6 +3,7 @@
 public class Game {
     private String last = "O";
     static GUI gui;
+    private boolean game_finished;
 
 
     public static void main(String[] args)
@@ -29,6 +30,7 @@ public class Game {
         //überpüfen der Spalte vom übergebenen Index
         if(gui.buttons[index%3].getText().equals(gui.buttons[index%3 + 3].getText()) && gui.buttons[index%3].getText().equals(gui.buttons[index%3 + 6].getText())){
             gui.label.setText("Spieler " + last + " hat gewonnen");
+            game_finished = true;
             return;
         }
 
@@ -36,18 +38,21 @@ public class Game {
         if(index%3 == 0){
             if(gui.buttons[index].getText().equals(gui.buttons[index+1].getText()) && gui.buttons[index].getText().equals(gui.buttons[index+2].getText())){
                 gui.label.setText("Spieler " + last + "  hat gewonnen");
+                game_finished = true;
                 return;
             }
         }
         if(index%3 == 1){
             if(gui.buttons[index].getText().equals(gui.buttons[index-1].getText()) && gui.buttons[index].getText().equals(gui.buttons[index+1].getText())){
                 gui.label.setText("Spieler " + last + " hat gewonnen");
+                game_finished = true;
                 return;
             }
         }
         if(index%3 == 2){
             if(gui.buttons[index].getText().equals(gui.buttons[index-1].getText()) && gui.buttons[index].getText().equals(gui.buttons[index-2].getText())){
                 gui.label.setText("Spieler " + last + " hat gewonnen");
+                game_finished = true;
                 return;
             }
         }
@@ -56,6 +61,7 @@ public class Game {
         if(index==0 || index==4 || index==8) {
             if (gui.buttons[0].getText().equals(gui.buttons[4].getText()) && gui.buttons[0].getText().equals(gui.buttons[8].getText())) {
                 gui.label.setText("Spieler " + last + " hat gewonnen");
+                game_finished = true;
                 return;
             }
         }
@@ -63,10 +69,19 @@ public class Game {
         if(index==2 || index==4 || index==6){
             if(gui.buttons[2].getText().equals(gui.buttons[4].getText()) && gui.buttons[2].getText().equals(gui.buttons[6].getText())){
                 gui.label.setText("Spieler " + last + " hat gewonnen");
+                game_finished = true;
                 return;
             }
         }
 
         return;
+    }
+
+    public boolean get_game_finished(){
+        return game_finished;
+    }
+
+    public void set_game_finished(boolean finished){
+        game_finished = finished;
     }
 }
